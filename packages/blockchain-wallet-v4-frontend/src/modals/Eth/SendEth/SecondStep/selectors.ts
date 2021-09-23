@@ -14,11 +14,6 @@ const ethFromLabel = curry((payment, state) => {
   switch (from.type) {
     case ADDRESS_TYPES.ACCOUNT:
       return selectors.core.kvStore.eth.getAccountLabel(state, from.address).getOrElse(from.address)
-    case ADDRESS_TYPES.LOCKBOX:
-      return selectors.core.kvStore.lockbox
-        .getLockboxEthAccount(state, from.address)
-        .map(prop('label'))
-        .getOrElse(from.address)
     default:
       return from.address
   }

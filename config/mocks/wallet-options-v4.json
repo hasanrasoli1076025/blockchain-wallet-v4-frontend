@@ -5,7 +5,6 @@
         "analyticsSiteId": 2,
         "environment": "dev",
         "announcements": {
-          "lockbox": {},
           "public": {},
           "swap": {},
           "wallet": {}
@@ -35,8 +34,6 @@
     "everypay": "https://igw-demo.every-pay.com",
     "exchange": "https://exchange.blockchain.com",
     "horizon": "https://horizon.stellar.org",
-    "ledger": "https://manager.api.live.ledger.com",
-    "ledgerSocket": "wss://api.ledgerwallet.com",
     "root": "https://blockchain.info",
     "veriff": "https://magic.veriff.me",
     "walletHelper": "https://wallet-helper.blockchain.com",

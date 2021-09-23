@@ -84,9 +84,6 @@ export default ({ api }: { api: APIType }) => {
         }
         return yield call(sign, p.raw)
       }
-      case ADDRESS_TYPES.LOCKBOX: {
-        return yield call(eth.signWithLockbox, network, transport, scrambleKey, p.raw)
-      }
       default:
         break
     }

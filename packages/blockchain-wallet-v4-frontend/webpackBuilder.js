@@ -226,12 +226,9 @@ const buildDevServerConfig = (
           'data:',
           'ws://localhost:8080',
           'wss://localhost:8080',
-          'wss://api.ledgerwallet.com',
           envConfig.API_DOMAIN,
           envConfig.EVERYPAY_URL,
           envConfig.HORIZON_URL,
-          envConfig.LEDGER_SOCKET_URL,
-          envConfig.LEDGER_URL,
           envConfig.ROOT_URL,
           envConfig.VERIFF_URL,
           envConfig.WALLET_HELPER_DOMAIN,
@@ -260,8 +257,6 @@ const buildDevServerConfig = (
           everypay: envConfig.EVERYPAY_URL,
           exchange: envConfig.EXCHANGE_URL,
           horizon: envConfig.HORIZON_URL,
-          ledger: localhostUrl + '/ledger', // will trigger reverse proxy
-          ledgerSocket: envConfig.LEDGER_SOCKET_URL,
           root: envConfig.ROOT_URL,
           veriff: envConfig.VERIFF_URL,
           walletHelper: envConfig.WALLET_HELPER_DOMAIN,
@@ -279,15 +274,7 @@ const buildDevServerConfig = (
         res.json(mockWalletOptions)
       })
     },
-    port: 8080,
-    proxy: {
-      '/ledger': {
-        target: envConfig.LEDGER_URL,
-        secure: false,
-        changeOrigin: true,
-        pathRewrite: { '^/ledger': '' }
-      }
-    }
+    port: 8080
   }
 }
 

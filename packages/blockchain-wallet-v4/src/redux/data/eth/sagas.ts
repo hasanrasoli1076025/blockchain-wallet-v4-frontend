@@ -2,7 +2,6 @@ import BigNumber from 'bignumber.js'
 import moment from 'moment'
 import {
   addIndex,
-  concat,
   dissoc,
   equals,
   filter,
@@ -36,7 +35,6 @@ import { calculateFee } from '@core/utils/eth'
 import * as Exchange from '../../../exchange'
 import * as transactions from '../../../transactions'
 import * as kvStoreSelectors from '../../kvStore/eth/selectors'
-import { getLockboxEthContext } from '../../kvStore/lockbox/selectors'
 import * as selectors from '../../selectors'
 import custodialSagas from '../custodial/sagas'
 import * as A from './actions'
@@ -54,6 +52,22 @@ export default ({ api }: { api: APIType }) => {
   //
   // ETH
   //
+  const checkForLowEthBalance = function* () {
+    // TODO: ERC20 check for any erc20 balance in future
+    const erc20Balance = (yield select(S.getErc20Balance, 'PAX')).getOrElse(0)
+    const weiBalance = (yield select(S.getBalance)).getOrFail()
+    const ethRates = selectors.data.coins.getRates('ETH', yield select()).getOrFail('No rates')
+    const ethBalance = Exchange.convertCoinToFiat({
+      coin: 'ETH',
+      currency: 'USD',
+      rates: ethRates,
+      value: weiBalance
+    })
+    // less than $1 eth and has PAX, set warning flag to true
+    const showWarning = parseInt(ethBalance) < 1 && erc20Balance > 0
+    yield put(A.checkLowEthBalanceSuccess(showWarning))
+  }
+
   const fetchData = function* () {
     try {
       yield put(A.fetchDataLoading())
@@ -259,22 +273,6 @@ export default ({ api }: { api: APIType }) => {
     } catch (e) {
       yield put(A.fetchLegacyBalanceFailure(e))
     }
-  }
-
-  const checkForLowEthBalance = function* () {
-    // TODO: ERC20 check for any erc20 balance in future
-    const erc20Balance = (yield select(S.getErc20Balance, 'PAX')).getOrElse(0)
-    const weiBalance = (yield select(S.getBalance)).getOrFail()
-    const ethRates = selectors.data.coins.getRates('ETH', yield select()).getOrFail('No rates')
-    const ethBalance = Exchange.convertCoinToFiat({
-      coin: 'ETH',
-      currency: 'USD',
-      rates: ethRates,
-      value: weiBalance
-    })
-    // less than $1 eth and has PAX, set warning flag to true
-    const showWarning = parseInt(ethBalance) < 1 && erc20Balance > 0
-    yield put(A.checkLowEthBalanceSuccess(showWarning))
   }
 
   //
@@ -514,20 +512,14 @@ export default ({ api }: { api: APIType }) => {
     const addresses = accountsR.getOrElse([]).map(prop('addr'))
     const tokens = selectors.data.eth.getErc20Coins()
     const erc20Contracts = tokens.map((coin) => window.coins[coin].coinfig.type.erc20Address)
-    const lockboxContextR = yield select(getLockboxEthContext)
-    const lockboxContext = lockboxContextR.getOrElse([])
     const state = yield select()
-    const ethAddresses = concat(addresses, lockboxContext)
-    return map(transformTx(ethAddresses, erc20Contracts, state), txs)
+    return map(transformTx(addresses, erc20Contracts, state), txs)
   }
   const __processErc20Txs = function* (txs, token) {
     const accountsR = yield select(kvStoreSelectors.getAccounts)
     const addresses = accountsR.getOrElse([]).map(prop('addr'))
-    const lockboxContextR = yield select(getLockboxEthContext)
-    const lockboxContext = lockboxContextR.getOrElse([])
     const state = yield select()
-    const ethAddresses = concat(addresses, lockboxContext)
-    return map(transformErc20Tx(ethAddresses, state, token), txs)
+    return map(transformErc20Tx(addresses, state, token), txs)
   }
 
   return {

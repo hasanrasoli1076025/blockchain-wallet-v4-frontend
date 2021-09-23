@@ -23,7 +23,6 @@ export type SupportedCoinType = {
   availability: {
     exchangeFrom: boolean
     exchangeTo: boolean
-    lockbox: boolean
     request: boolean
     send: boolean
     syncToPit: boolean
@@ -36,7 +35,6 @@ export type SupportedCoinType = {
   }
   contractAddress?: string
   displayName: string
-  hasLockboxSupport: boolean
   invited?: boolean
   isFiat?: boolean
   isMemoBased?: boolean

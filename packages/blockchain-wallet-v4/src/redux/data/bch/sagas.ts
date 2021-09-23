@@ -12,7 +12,6 @@ import { errorHandler, MISSING_WALLET } from '../../../utils'
 import { addFromToAccountNames } from '../../../utils/accounts'
 import { BCH_FORK_TIME, convertFromCashAddrIfCashAddr, TX_PER_PAGE } from '../../../utils/bch'
 import { getAccountsList, getBchTxNotes } from '../../kvStore/bch/selectors'
-import { getLockboxBchAccounts } from '../../kvStore/lockbox/selectors'
 import * as selectors from '../../selectors'
 import * as walletSelectors from '../../wallet/selectors'
 import custodialSagas from '../custodial/sagas'
@@ -103,19 +102,16 @@ export default ({ api }: { api: APIType }) => {
     const walletR = Remote.of(wallet)
     const accountList = (yield select(getAccountsList)).getOrElse([])
     const txNotes = (yield select(getBchTxNotes)).getOrElse({})
-    const lockboxAccountList = (yield select(getLockboxBchAccounts))
-      .map(HDAccountList.fromJS)
-      .getOrElse([])
 
     // transformTx :: wallet -> Tx
     // ProcessPage :: wallet -> [Tx] -> [Tx]
-    const ProcessTxs = (wallet, lockboxAccountList, txList, txNotes) =>
+    const ProcessTxs = (wallet, txList, txNotes) =>
       map(
-        transformTx.bind(undefined, wallet.getOrFail(MISSING_WALLET), lockboxAccountList, txNotes),
+        transformTx.bind(undefined, wallet.getOrFail(MISSING_WALLET), txNotes),
         txList
       )
     // ProcessRemotePage :: Page -> Page
-    const processedTxs = ProcessTxs(walletR, lockboxAccountList, txs, txNotes)
+    const processedTxs = ProcessTxs(walletR, txs, txNotes)
     return addFromToAccountNames(wallet, accountList, processedTxs)
   }
 

@@ -1,101 +1,85 @@
 import React from 'react'
-import Joyride, { ACTIONS, EVENTS, STATUS } from 'react-joyride'
-import { connect } from 'react-redux'
-import { Route, Switch, withRouter } from 'react-router-dom'
-import { bindActionCreators } from 'redux'
+import { FormattedMessage } from 'react-intl'
 import styled from 'styled-components'
 
-import { actions, selectors } from 'data'
-
-import LockboxDashboard from './Dashboard'
-import { TOUR_STEPS, TourTooltip } from './model'
-import LockboxOnboard from './Onboard'
+import { Button, Image, Link, Text } from 'blockchain-info-components'
+import { Box } from 'components/Box'
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  height: 100%;
   width: 100%;
+  align-items: center;
+  justify-content: center;
 `
-class LockboxContainer extends React.PureComponent {
-  state = { run: false, steps: TOUR_STEPS }
+const BoxStyled = styled(Box)`
+  display: flex;
+  width: 19.5rem;
+`
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`
+const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+`
+const Title = styled(Text)`
+  margin-left: 1rem;
+`
+const Paragraph = styled(Text)`
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+`
+const LearnMoreButton = styled(Button)`
+  margin-top: 1.25rem;
+`
 
-  componentDidMount() {
-    this.checkForcedRouting()
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
-      if (this.props.showProductTour) {
-        this.onStartTour()
-      }
-      this.checkForcedRouting()
-    }
-  }
-
-  // need to force route match on all entries from side menu click
-  checkForcedRouting = () => {
-    if (this.props.location.pathname === '/lockbox') {
-      this.props.lockboxActions.determineLockboxRoute()
-    }
-  }
-
-  onStartTour = () => {
-    this.setState({ run: true })
-  }
-
-  handleTourCallbacks = data => {
-    if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(data.type)) {
-      // advance current step
-      this.setState({
-        stepIndex: data.index + (data.action === ACTIONS.PREV ? -1 : 1)
-      })
-    } else if ([STATUS.FINISHED, STATUS.SKIPPED].includes(data.status)) {
-      // end tour
-      this.setState({ run: false })
-      this.props.lockboxActions.setProductTourVisibility(false)
-    }
-  }
-
-  render() {
-    const { run, steps } = this.state
-
-    return (
-      <Wrapper>
-        <Joyride
-          run={run}
-          steps={steps}
-          disableScrollParentFix={true}
-          callback={this.handleTourCallbacks}
-          tooltipComponent={TourTooltip}
-          {...this.props.Joyride}
-        />
-        <Switch>
-          <Route
-            path='/lockbox/dashboard/:deviceIndex'
-            component={LockboxDashboard}
-            exact
-          />
-          <Route
-            path='/lockbox/settings/:deviceIndex'
-            component={LockboxDashboard}
-            exact
-          />
-          <Route path='/lockbox/onboard' component={LockboxOnboard} exact />
-        </Switch>
-      </Wrapper>
-    )
-  }
+const Lockbox = () => {
+  return (
+    <Wrapper>
+      <BoxStyled>
+        <ContentWrapper>
+          <TitleWrapper>
+            <Image name='alert' width='32px' />
+            <Title size='20px' color='grey800' weight={600}>
+              <FormattedMessage
+                id='scenes.lockbox.title'
+                defaultMessage='Notice for Discontinuation of Lockbox'
+              />
+            </Title>
+          </TitleWrapper>
+          <Paragraph size='14px' color='grey600' weight={500}>
+            <FormattedMessage
+              id='scenes.lockbox.discontinued1'
+              defaultMessage='We regret to inform you that we have ended support for Lockbox on the Blockchain.com wallet.  Your device and funds contained on it are safe and are able to be recovered via your 24 word recovery phrase for the device.'
+            />
+          </Paragraph>
+          <Paragraph size='14px' color='grey600' weight={500}>
+            <FormattedMessage
+              id='scenes.lockbox.discontinued2'
+              defaultMessage='View the article below for more detailed information on how to recover your funds.'
+            />
+          </Paragraph>
+          <Link
+            href='https://support.blockchain.com/hc/en-us/articles/360018285872-How-to-recover-your-Lockbox-funds'
+            target='_blank'
+          >
+            <LearnMoreButton
+              data-e2e='lockboxDiscontinuedInstructions'
+              fullwidth
+              nature='dark-grey'
+            >
+              <FormattedMessage id='buttons.learn_more' defaultMessage='Learn More' />
+            </LearnMoreButton>
+          </Link>
+        </ContentWrapper>
+      </BoxStyled>
+    </Wrapper>
+  )
 }
 
-const mapStateToProps = state => ({
-  showProductTour: selectors.components.lockbox.getProductTourVisibility(state)
-})
-
-const mapDispatchToProps = dispatch => ({
-  lockboxActions: bindActionCreators(actions.components.lockbox, dispatch)
-})
-
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(LockboxContainer)
-)
+export default Lockbox
