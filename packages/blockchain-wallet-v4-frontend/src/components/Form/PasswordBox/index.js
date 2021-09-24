@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Icon, PasswordGauge, PasswordInput, Text } from 'blockchain-info-components'
+import { Icon, PasswordInput, Text } from 'blockchain-info-components'
 
 const Container = styled.div`
   position: relative;
@@ -38,19 +38,9 @@ const getErrorState = ({ invalid, touched }) => {
 }
 
 const PasswordBox = (field) => {
-  const {
-    autoFocus,
-    borderColor,
-    disabled,
-    input,
-    meta,
-    noLastPass,
-    passwordScore,
-    showPasswordScore
-  } = field
+  const { autoFocus, borderColor, disabled, input, meta, noLastPass } = field
   const { active, error, touched } = meta
   const errorState = getErrorState(meta)
-  const scoreVisible = showPasswordScore ? input.value.length > 0 : false
 
   return (
     <Container>
@@ -65,7 +55,6 @@ const PasswordBox = (field) => {
           data-e2e={field['data-e2e']}
           noLastPass={noLastPass}
         />
-        {scoreVisible && <PasswordGauge score={passwordScore + 1} />}
       </PasswordContainer>
       {touched && error && (
         <>

@@ -1,6 +1,5 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
-import { has } from 'ramda'
 import { Field } from 'redux-form'
 import styled from 'styled-components'
 
@@ -8,7 +7,7 @@ import { HeartbeatLoader } from 'blockchain-info-components'
 import { FormGroup, FormLabel, PasswordBox } from 'components/Form'
 import Terms from 'components/Terms'
 import { RecoverSteps } from 'data/types'
-import { required, validPasswordConfirmation, validStrongPassword } from 'services/forms'
+import { required, validPasswordConfirmation } from 'services/forms'
 
 import { ActionButton, BackArrowFormHeader, ReverifyIdentityInfoBox } from '../../model'
 import { Props as OwnProps } from '..'
@@ -23,7 +22,7 @@ const Footer = styled(FormGroup)`
 const validatePasswordConfirmation = validPasswordConfirmation('resetAccountPassword')
 
 const SecondStep = (props: Props) => {
-  const { emailFromMagicLink, invalid, isRegistering, resetPassword, setStep } = props
+  const { emailFromMagicLink, invalid, isRegistering, setStep } = props
   return (
     <>
       <BackArrowFormHeader
@@ -38,10 +37,8 @@ const SecondStep = (props: Props) => {
         <Field
           bgColor='grey000'
           name='resetAccountPassword'
-          validate={[required, validStrongPassword]}
+          validate={[required]}
           component={PasswordBox}
-          showPasswordScore
-          passwordScore={has('zxcvbn', window) ? window.zxcvbn(resetPassword).score : 0}
         />
       </FormGroup>
       <FormGroup>

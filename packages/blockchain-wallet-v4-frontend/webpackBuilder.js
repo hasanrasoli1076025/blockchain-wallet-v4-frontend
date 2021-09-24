@@ -68,14 +68,9 @@ const getAndLogEnvConfig = () => {
 const buildWebpackConfig = (envConfig, extraPluginsList) => ({
   devtool: false, // default is false but needs to be set so dev config can override
   entry: {
-    main: {
-      dependOn: 'vendor',
-      filename: 'main-[contenthash:6].js',
+    app: {
+      filename: 'app-[contenthash:6].js',
       import: CONFIG_PATH.src + '/index.js'
-    },
-    vendor: {
-      filename: 'vendor-[contenthash:6].js',
-      import: ['@babel/polyfill', 'react', 'react-dom', 'redux', 'react-redux']
     },
   },
   output: {
@@ -169,6 +164,9 @@ const buildWebpackConfig = (envConfig, extraPluginsList) => ({
   optimization: {
     runtimeChunk: {
       name: `manifest-${new Date().getTime()}`
+    },
+    splitChunks: {
+      maxSize: 750000, // 0.75 MB max chunk size
     }
   }
 })

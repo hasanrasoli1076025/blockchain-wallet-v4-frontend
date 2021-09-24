@@ -10,6 +10,5 @@ declare global {
         coinfig: CoinfigType
       }
     }
-    zxcvbn?: any
   }
 }

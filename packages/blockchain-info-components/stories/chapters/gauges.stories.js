@@ -3,7 +3,7 @@ import { withInfo } from '@storybook/addon-info'
 import { addDecorator } from '@storybook/react'
 
 import Layout from '../components/layout'
-import { ConfirmationGauge, PasswordGauge, SecurityGauge } from '../../src'
+import { ConfirmationGauge, SecurityGauge } from '../../src'
 
 addDecorator(withInfo)
 
@@ -26,20 +26,6 @@ export const _ConfirmationGauge = () => (
 
 _ConfirmationGauge.story = {
   name: 'ConfirmationGauge'
-}
-
-export const _PasswordGauge = () => (
-  <div>
-    <PasswordGauge score={1} />
-    <PasswordGauge score={2} />
-    <PasswordGauge score={3} />
-    <PasswordGauge score={4} />
-    <PasswordGauge score={5} />
-  </div>
-)
-
-_PasswordGauge.story = {
-  name: 'PasswordGauge'
 }
 
 export const _SecurityGauge = () => (

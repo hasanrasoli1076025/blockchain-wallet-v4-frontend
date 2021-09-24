@@ -70,12 +70,6 @@ export const validIpList = (ipList) => {
   return !ipList || all(isIpValid)(ipList.split(',')) ? undefined : <M.InvalidIpListMessage />
 }
 
-export const validStrongPassword = (value) => {
-  return value !== undefined && window.zxcvbn && window.zxcvbn(value).score > 1 ? undefined : (
-    <M.InvalidStrongPassword />
-  )
-}
-
 export const validPasswordConfirmation = (passwordFieldName) => (value, allValues) =>
   value === allValues[passwordFieldName] ? undefined : <M.PasswordsDoNotMatch />
 

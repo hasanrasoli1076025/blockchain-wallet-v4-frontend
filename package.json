@@ -203,7 +203,6 @@
     "stylelint-config-styled-components": "0.1.1",
     "stylelint-prettier": "1.2.0",
     "stylelint-processor-styled-components": "1.10.0",
-    "terser-webpack-plugin": "5.2.4",
     "themeprovider-storybook": "1.7.2",
     "thread-loader": "3.0.4",
     "ts-jest": "27.0.4",

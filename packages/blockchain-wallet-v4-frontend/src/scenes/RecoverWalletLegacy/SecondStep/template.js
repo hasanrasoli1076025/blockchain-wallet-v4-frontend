@@ -1,6 +1,5 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
-import { has } from 'ramda'
 import { Field, reduxForm } from 'redux-form'
 import styled from 'styled-components'
 
@@ -8,12 +7,7 @@ import { Button, HeartbeatLoader, Link, Text } from 'blockchain-info-components'
 import { Form, FormGroup, FormLabel, PasswordBox, TextBox } from 'components/Form'
 import { Wrapper } from 'components/Public'
 import Terms from 'components/Terms'
-import {
-  required,
-  validEmail,
-  validPasswordConfirmation,
-  validStrongPassword
-} from 'services/forms'
+import { required, validEmail, validPasswordConfirmation } from 'services/forms'
 
 const Header = styled.div`
   display: flex;
@@ -34,14 +28,7 @@ const GoBackLink = styled(Link)`
 const validatePasswordConfirmation = validPasswordConfirmation('password')
 
 const SecondStep = (props) => {
-  const {
-    handleSubmit,
-    invalid,
-    isRegistering,
-    isRestoringFromMetadata,
-    password,
-    previousStep
-  } = props
+  const { handleSubmit, invalid, isRegistering, isRestoringFromMetadata, previousStep } = props
 
   return (
     <Wrapper>
@@ -68,14 +55,7 @@ const SecondStep = (props) => {
           <FormLabel htmlFor='password'>
             <FormattedMessage id='scenes.recover.secondstep.password' defaultMessage='Password' />
           </FormLabel>
-          <Field
-            bgColor='grey000'
-            name='password'
-            validate={[required, validStrongPassword]}
-            component={PasswordBox}
-            showPasswordScore
-            passwordScore={has('zxcvbn', window) ? window.zxcvbn(password).score : 0}
-          />
+          <Field bgColor='grey000' name='password' validate={[required]} component={PasswordBox} />
         </FormGroup>
         <FormGroup>
           <FormLabel htmlFor='confirmationPassword'>

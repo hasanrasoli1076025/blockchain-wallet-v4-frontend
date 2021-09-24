@@ -1,25 +1,17 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import PropTypes from 'prop-types'
-import { has } from 'ramda'
 import { Field, reduxForm } from 'redux-form'
 import styled from 'styled-components'
 
 import { Button } from 'blockchain-info-components'
-import {
-  Form,
-  FormGroup,
-  FormItem,
-  FormLabel,
-  PasswordBox
-} from 'components/Form'
+import { Form, FormGroup, FormItem, FormLabel, PasswordBox } from 'components/Form'
 import { SettingWrapper } from 'components/Setting'
 import {
   isNotCurrentPassword,
   required,
   validCurrentPassword,
-  validPasswordConfirmation,
-  validStrongPassword
+  validPasswordConfirmation
 } from 'services/forms'
 
 const ButtonWrapper = styled.div`
@@ -38,25 +30,13 @@ const FormItemSpaced = styled(FormItem)`
 
 const validatePasswordConfirmation = validPasswordConfirmation('newPassword')
 
-const Settings = props => {
-  const {
-    handleCancel,
-    handleSubmit,
-    handleToggle,
-    invalid,
-    newWalletPasswordValue,
-    submitting,
-    updateToggled
-  } = props
+const Settings = (props) => {
+  const { handleCancel, handleSubmit, handleToggle, invalid, submitting, updateToggled } = props
 
   return (
     <SettingWrapper>
       {!updateToggled && (
-        <Button
-          nature='primary'
-          onClick={handleToggle}
-          data-e2e='changeCurrentPassword'
-        >
+        <Button nature='primary' onClick={handleToggle} data-e2e='changeCurrentPassword'>
           <FormattedMessage
             id='scenes.securitysettings.advanced.walletpassword.settings.change'
             defaultMessage='Change'
@@ -92,13 +72,7 @@ const Settings = props => {
                 noLastPass
                 name='newPassword'
                 component={PasswordBox}
-                validate={[validStrongPassword, isNotCurrentPassword]}
-                showPasswordScore
-                passwordScore={
-                  has('zxcvbn', window)
-                    ? window.zxcvbn(newWalletPasswordValue).score
-                    : 0
-                }
+                validate={[isNotCurrentPassword]}
                 data-e2e='newPasswordInput'
               />
             </FormItemSpaced>
@@ -147,9 +121,9 @@ const Settings = props => {
 }
 
 Settings.propTypes = {
-  updateToggled: PropTypes.bool.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   handleToggle: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  updateToggled: PropTypes.bool.isRequired
 }
 
 export default reduxForm({ form: 'settingWalletPassword' })(Settings)

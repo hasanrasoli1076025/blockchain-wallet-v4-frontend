@@ -1,7 +1,6 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
-import { has, props } from 'ramda'
-import { Field, reduxForm } from 'redux-form'
+import { Field } from 'redux-form'
 import styled from 'styled-components'
 
 import { Button, HeartbeatLoader, Text } from 'blockchain-info-components'
@@ -9,12 +8,7 @@ import { Form, FormGroup, FormLabel, PasswordBox, TextBox } from 'components/For
 import { Wrapper } from 'components/Public'
 import Terms from 'components/Terms'
 import { RecoverSteps } from 'data/types'
-import {
-  required,
-  validEmail,
-  validPasswordConfirmation,
-  validStrongPassword
-} from 'services/forms'
+import { required, validEmail, validPasswordConfirmation } from 'services/forms'
 
 import { Column, ReverifyIdentityInfoBox } from '../../model'
 import { Props as OwnProps } from '.'
@@ -108,19 +102,14 @@ class SecondStep extends React.PureComponent<Props, State> {
                       />
                     )}
                     {!isRestoringFromMetadata && (
-                      <FormattedMessage
-                        id='copy.new_password'
-                        defaultMessage='New Password'
-                      />
+                      <FormattedMessage id='copy.new_password' defaultMessage='New Password' />
                     )}
                   </FormLabel>
                   <Field
                     bgColor='grey000'
                     name='recoverPassword'
-                    validate={[required, validStrongPassword]}
+                    validate={[required]}
                     component={PasswordBox}
-                    showPasswordScore
-                    passwordScore={has('zxcvbn', window) ? window.zxcvbn(recoverPassword).score : 0}
                   />
                 </FormGroup>
                 <FormGroup>

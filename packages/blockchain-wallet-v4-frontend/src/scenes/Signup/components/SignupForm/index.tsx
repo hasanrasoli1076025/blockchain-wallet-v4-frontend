@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { Field, InjectedFormProps } from 'redux-form'
 import styled from 'styled-components'
@@ -21,8 +21,7 @@ import { isBrowserSupported } from 'services/browser'
 import {
   required,
   validEmail,
-  validPasswordConfirmation,
-  validStrongPassword
+  validPasswordConfirmation
 } from 'services/forms'
 
 import { SubviewProps } from '../../types'
@@ -39,9 +38,6 @@ const StyledForm = styled(Form)`
 `
 const BrowserWarning = styled.div`
   margin-bottom: 10px;
-`
-const PasswordTip = styled(Text)`
-  margin-top: 4px;
 `
 const FieldWrapper = styled.div`
   margin-top: 0.25rem;
@@ -78,9 +74,6 @@ const SignupForm = (props: InjectedFormProps<{}, SubviewProps> & SubviewProps) =
     signupCountryEnabled,
     userGeoData
   } = props
-  const { password = '' } = formValues || {}
-  const passwordScore = window.zxcvbn ? window.zxcvbn(password).score : 0
-
   useEffect(() => {
     if (userGeoData?.countryCode && signupCountryEnabled) {
       props.setDefaultCountry(userGeoData.countryCode)
@@ -126,35 +119,9 @@ const SignupForm = (props: InjectedFormProps<{}, SubviewProps> & SubviewProps) =
             data-e2e='signupPassword'
             disabled={!isSupportedBrowser}
             name='password'
-            passwordScore={passwordScore}
-            showPasswordScore
-            validate={[required, validStrongPassword]}
+            validate={[required]}
           />
         </FormItem>
-        {password.length > 0 && (
-          <div>
-            <PasswordTip size='12px' weight={400}>
-              {passwordScore <= 1 && (
-                <FormattedMessage
-                  id='formhelper.passwordsuggest.weak'
-                  defaultMessage='Weak. Use at least 8 characters, a mix of letters, numbers and symbols.'
-                />
-              )}
-              {passwordScore >= 2 && passwordScore < 4 && (
-                <FormattedMessage
-                  id='formhelper.passwordsuggest.medium'
-                  defaultMessage='Medium. Use at least 8 characters, a mix of letters, numbers and symbols.'
-                />
-              )}
-              {passwordScore === 4 && (
-                <FormattedMessage
-                  id='formhelper.passwordsuggest.great'
-                  defaultMessage='Great password.'
-                />
-              )}
-            </PasswordTip>
-          </div>
-        )}
       </FormGroup>
       <FormGroup>
         <FormItem>
