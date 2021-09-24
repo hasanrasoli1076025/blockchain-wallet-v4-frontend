@@ -13,9 +13,9 @@ Please [contact support](https://support.blockchain.com) if you have any issues 
 This repo contains the three codebases/packages listed below.
 
 ### Packages
- * [blockchain-info-components](./packages/blockchain-info-components) The shared UI components library.
- * [blockchain-wallet-v4](./packages/blockchain-wallet-v4) The functional library for handling wallets.
- * [blockchain-wallet-v4-frontend](./packages/blockchain-wallet-v4-frontend) The frontend application built with React/Redux.
+ * [components](./packages/components) The shared UI components library.
+ * [core](./packages/core) The functional library for handling wallets.
+ * [frontend](./packages/frontend) The frontend application built with React/Redux.
 
 
 ## Local Development
@@ -83,9 +83,9 @@ We follow the rules outlined by the [Javascript Standard Style](https://standard
 
 Code linting is handled by [ESLint](https://eslint.org/). The following commands are available:
  * `yarn lint` Lints all packages
- * `yarn lint:components` Lints only [blockchain-info-components](./packages/blockchain-info-components)
- * `yarn lint:core` Lints only [blockchain-wallet-v4](./packages/blockchain-wallet-v4)
- * `yarn lint:frontend` Lints only [blockchain-wallet-v4-frontend](./packages/blockchain-wallet-v4-frontend)
+ * `yarn lint:components` Lints only [components](./packages/components)
+ * `yarn lint:core` Lints only [core](./packages/core)
+ * `yarn lint:frontend` Lints only [frontend](./packages/frontend)
  * `yarn lint:fix` Automatically resolves fixable issues via ESLint
 
 These IDE plugins/packages assist with complying with these lint rules while developing:
@@ -97,9 +97,9 @@ These IDE plugins/packages assist with complying with these lint rules while dev
 We follow all standard rules that are provided by Prettier. The following commands are available:
 
  * `yarn prettier` Runs Prettier against all packages
- * `yarn prettier:components` Runs Prettier against only [blockchain-info-components](./packages/blockchain-info-components)
- * `yarn prettier:core` Runs Prettier against only [blockchain-wallet-v4](./packages/blockchain-wallet-v4)
- * `yarn prettier:frontend` Runs Prettier against only [blockchain-wallet-v4-frontend](./packages/blockchain-wallet-v4-frontend)
+ * `yarn prettier:components` Runs Prettier against only [components](./packages/components)
+ * `yarn prettier:core` Runs Prettier against only [core](./packages/core)
+ * `yarn prettier:frontend` Runs Prettier against only [frontend](./packages/frontend)
  
 It is recommended to setup a Prettier plugin for your IDE plugins/packages that will automatically prettify your files on save.
  * [Atom](https://atom.io/packages/prettier-atom)
@@ -113,23 +113,23 @@ Testing is done via [Jest](https://facebook.github.io/jest/) and [Enzyme](http:/
 
 #### Running Tests
  * `yarn test` Runs unit tests for all packages
- * `yarn test:components` Runs unit tests for only [blockchain-info-components](./packages/blockchain-info-components)
- * `yarn test:core` Runs unit tests for only [blockchain-wallet-v4](./packages/blockchain-wallet-v4)
- * `yarn test:frontend` Runs unit tests for only [blockchain-wallet-v4-frontend](./packages/blockchain-wallet-v4-frontend)
+ * `yarn test:components` Runs unit tests for only [components](./packages/components)
+ * `yarn test:core` Runs unit tests for only [core](./packages/core)
+ * `yarn test:frontend` Runs unit tests for only [frontend](./packages/frontend)
  
  _Note: if you see errors that Jest cannot resolve package imports, you may need to run `yarn test` before testing specific packages (eg, `yarn test:frontend`)_
 
 #### Running Tests via Watch
  * `yarn test:watch` Watches and then runs desired tests
- * `yarn test:components:watch` Watches and then runs desired tests for only [blockchain-info-components](./packages/blockchain-info-components)
- * `yarn test:core:watch` Watches and then runs desired tests for only [blockchain-wallet-v4](./packages/blockchain-wallet-v4)
- * `yarn test:frontend:watch` Watches and then runs desired tests for only [blockchain-wallet-v4-frontend](./packages/blockchain-wallet-v4-frontend)
+ * `yarn test:components:watch` Watches and then runs desired tests for only [components](./packages/components)
+ * `yarn test:core:watch` Watches and then runs desired tests for only [core](./packages/core)
+ * `yarn test:frontend:watch` Watches and then runs desired tests for only [frontend](./packages/frontend)
 
 #### Debugging Tests
 To enable debugging for unit tests via the Chrome browser, run the following commands:
- * `yarn test:components:debug` Debugs unit tests for only [blockchain-info-components](./packages/blockchain-info-components)
- * `yarn test:core:debug` Debugs unit tests for only [blockchain-wallet-v4](./packages/blockchain-wallet-v4)
- * `yarn test:frontend:debug` Debugs unit tests for only [blockchain-wallet-v4-frontend](./packages/blockchain-wallet-v4-frontend)
+ * `yarn test:components:debug` Debugs unit tests for only [components](./packages/components)
+ * `yarn test:core:debug` Debugs unit tests for only [core](./packages/core)
+ * `yarn test:frontend:debug` Debugs unit tests for only [frontend](./packages/frontend)
 
 After running one of the above commands, Node will wait for a debugger to attach before starting the tests.
 To attach, simply open your browser and go to `chrome://inspect` and click on "Open Dedicated DevTools for Node",
@@ -138,21 +138,21 @@ which will give you a list of available node instances you can connect to. Click
 
 #### Updating Snapshot Tests
 We are snapshot testing UI some components. Here are the commands to update them when necessary:
- * `yarn test:components:update` Updates component snapshots for only [blockchain-info-components](./packages/blockchain-info-components)
- * `yarn test:frontend:update` Updates component snapshots for only [blockchain-wallet-v4-frontend](./packages/blockchain-wallet-v4-frontend)
+ * `yarn test:components:update` Updates component snapshots for only [components](./packages/components)
+ * `yarn test:frontend:update` Updates component snapshots for only [frontend](./packages/frontend)
 
 ### Code Coverage
 To generate code coverage reports via [Istanbul](https://istanbul.js.org/), the following commands are available:
  * `yarn coverage` Generates a coverage report for all packages
- * `yarn coverage:components` Generates coverage report for only [blockchain-info-components](./packages/blockchain-info-components)
- * `yarn coverage:core` Generates coverage report for only [blockchain-wallet-v4](./packages/blockchain-wallet-v4)
- * `yarn coverage:frontend` Generates coverage report for only [blockchain-wallet-v4-frontend](./packages/blockchain-wallet-v4-frontend)
+ * `yarn coverage:components` Generates coverage report for only [components](./packages/components)
+ * `yarn coverage:core` Generates coverage report for only [core](./packages/core)
+ * `yarn coverage:frontend` Generates coverage report for only [frontend](./packages/frontend)
 
 Depending upon which coverage report was ran, the results can be found in the following directories:
  * `coverage/index.html`
- * `coverage/blockchain-info-components/index.html`
- * `coverage/blockchain-wallet-v4/index.html`
- * `coverage/blockchain-wallet-v4-frontend/index.html`
+ * `coverage/components/index.html`
+ * `coverage/core/index.html`
+ * `coverage/frontend/index.html`
 Simply open the `index.html` file in your browser to view.
 
 ## TypeScript
@@ -168,14 +168,14 @@ To visualize and interact with the tree of the production code bundles files:
 Once completed, a browser will automatically open with the results.
 
 ## Storybook
-[Storybook](https://github.com/storybooks/storybook) is used by the [blockchain-info-components](./packages/blockchain-info-components) and [blockchain-wallet-v4-frontend](./packages/blockchain-wallet-v4-frontend) packages to interactively view, develop and test components.
+[Storybook](https://github.com/storybooks/storybook) is used by the [components](./packages/components) and [frontend](./packages/frontend) packages to interactively view, develop and test components.
 The following commands are available:
  * `storybook:build-wallet`: Builds the static storybook assets for wallet specific components (if base components is running locally, storybook will put wallet and base components into the same storybook UI)
  * `storybook:build-base`: Builds the static storybook assets for base shared components
  * `storybook:serve-wallet` Builds storybook assets and then serves them locally at `localhost:6006`
  * `storybook:serve-base` Builds storybook assets and then serves them locally at `localhost:6007`
- * `storybook:deploy-wallet` Builds storybook assets and then serves them to [github pages](https://blockchain.github.io/blockchain-wallet-v4-frontend). **You will probably need to run `cd ./packages/blockchain-info-components && git remote add origin git@github.com:blockchain/blockchain-wallet-v4-frontend.git` first.**
- * `storybook:deploy-base` Builds storybook assets and then serves them to [github pages](https://blockchain.github.io/blockchain-wallet-v4-frontend). **You will probably need to run `cd ./packages/blockchain-info-components && git remote add origin git@github.com:blockchain/blockchain-wallet-v4-frontend.git` first.**
+ * `storybook:deploy-wallet` Builds storybook assets and then serves them to [github pages](https://blockchain.github.io/blockchain-wallet-v4-frontend). **You will probably need to run `cd ./packages/components && git remote add origin git@github.com:blockchain/blockchain-wallet-v4-frontend.git` first.**
+ * `storybook:deploy-base` Builds storybook assets and then serves them to [github pages](https://blockchain.github.io/blockchain-wallet-v4-frontend). **You will probably need to run `cd ./packages/components && git remote add origin git@github.com:blockchain/blockchain-wallet-v4-frontend.git` first.**
 
 If the deploy begins to fail, deleting the static build file before redeploy will likely help.
 

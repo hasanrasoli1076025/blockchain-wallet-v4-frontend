@@ -1,4 +1,4 @@
-import Theme from 'blockchain-info-components/src/Colors/Default'
+import Theme from '@components/src/Colors/Default'
 
 import 'styled-components'
 

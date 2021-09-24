@@ -9,7 +9,7 @@ module.exports = {
   legacyPages: resolveRoot('legacy-pages'),
   pkgJson: resolveRoot('package.json'),
   envConfig: resolveRoot('config/env'),
-  src: resolveRoot('packages/blockchain-wallet-v4-frontend/src'),
+  src: resolveRoot('packages/frontend/src'),
   sslConfig: resolveRoot('config/ssl'),
   tsConfig: resolveRoot('tsconfig.json'),
   wellKnownConfig: resolveRoot('.well-known')

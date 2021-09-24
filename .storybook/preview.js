@@ -2,8 +2,8 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { addDecorator } from '@storybook/react';
 
-import { Palette } from '../packages/blockchain-info-components/src/Colors/index'
-import { FontGlobalStyles, IconGlobalStyles } from '../packages/blockchain-info-components/src'
+import { Palette } from '../packages/components/src/Colors/index'
+import { FontGlobalStyles, IconGlobalStyles } from '../packages/components/src'
 
 const withTheme = () => (story, context) => {
   const theme1= Palette('default')

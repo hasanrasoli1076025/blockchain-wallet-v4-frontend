@@ -31,21 +31,21 @@ storybook-static/
 
 # Package Files
 # Components Package
-packages/blockchain-info-components/lib
-packages/blockchain-info-components/node_modules
-packages/blockchain-info-components/storybook-static
-packages/blockchain-info-components/package-lock.json
+packages/components/lib
+packages/components/node_modules
+packages/components/storybook-static
+packages/components/package-lock.json
 # Core Package
-packages/blockchain-wallet-v4/lib
-packages/blockchain-wallet-v4/node_modules
-packages/blockchain-wallet-v4/package-lock.json
+packages/core/lib
+packages/core/node_modules
+packages/core/package-lock.json
 # Frontend Package
-packages/blockchain-wallet-v4-frontend/.awcache
-packages/blockchain-wallet-v4-frontend/build
-packages/blockchain-wallet-v4-frontend/dist
-packages/blockchain-wallet-v4-frontend/extracted-ts
-packages/blockchain-wallet-v4-frontend/node_modules
-packages/blockchain-wallet-v4-frontend/package-lock.json
+packages/frontend/.awcache
+packages/frontend/build
+packages/frontend/dist
+packages/frontend/extracted-ts
+packages/frontend/node_modules
+packages/frontend/package-lock.json
 
 # Config Files
 config/env/development.js
