@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { Remote } from '@core'
-import { FileUploadItem, InterestEDDDocumentsResponse } from '@core/src/types'
+import { FileUploadItem, InterestEDDDocumentsResponse } from '@core/types'
 import { ModalOriginType } from 'data/modals/types'
 
 import {

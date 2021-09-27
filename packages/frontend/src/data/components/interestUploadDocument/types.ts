@@ -1,4 +1,4 @@
-import { InterestEDDDocumentsResponse, RemoteDataType } from '@core/src/types'
+import { InterestEDDDocumentsResponse, RemoteDataType } from '@core/types'
 
 export enum InterestUploadDocumentsStepType {
   'INIT_PAGE',

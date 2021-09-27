@@ -1,4 +1,4 @@
-import { InterestEDDDocumentsResponse } from '@core/src/types'
+import { InterestEDDDocumentsResponse } from '@core/types'
 import { InterestUploadDocumentsStepType } from 'data/types'
 
 import { actions, initialState, reducer } from './slice'

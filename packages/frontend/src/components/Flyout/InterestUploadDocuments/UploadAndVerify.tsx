@@ -3,9 +3,9 @@ import { FormattedMessage } from 'react-intl'
 import styled from 'styled-components'
 
 import { Button, Text } from '@components'
-import { FileUploadItem, InterestEDDDocumentsResponse } from '@core/src/types'
-
+import { FileUploadItem, InterestEDDDocumentsResponse } from '@core/types'
 import { toBase64 } from 'utils/helpers'
+
 import DragAndDrop from '../../DragAndDrop'
 import Container from '../Container'
 import Content from '../Content'

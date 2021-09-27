@@ -1,5 +1,3 @@
-import { SEND_FORM } from 'modals/SendCrypto/model'
-import { SendFormType } from 'modals/SendCrypto/types'
 import { call, put, select } from 'redux-saga/effects'
 
 import { convertCoinToCoin } from '@core/exchange'
@@ -7,6 +5,8 @@ import { APIType } from '@core/network/api'
 import { errorHandler } from '@core/utils'
 import { actions, selectors } from 'data'
 import { ModalName, ModalNameType } from 'data/modals/types'
+import { SEND_FORM } from 'modals/SendCrypto/model'
+import { SendFormType } from 'modals/SendCrypto/types'
 
 import * as S from './selectors'
 import { actions as A } from './slice'
